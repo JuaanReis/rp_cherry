@@ -1,0 +1,1 @@
+"""Schemas da aplicação."""

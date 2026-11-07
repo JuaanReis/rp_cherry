@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="theme-color" content="#100809" />
+    <title>RP Modas Cereja · Painel</title>
+    <link rel="icon" href="/static/assets/cherry.svg" />
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="stylesheet" href="/admin-assets/css/admin.css" />
+    <link rel="stylesheet" href="/admin-assets/css/dashboard.css" />
+    <script src="/static/js/common.js" defer></script>
+    <script src="/admin-assets/js/admin.js" defer></script>
+  </head>
+  <body class="admin-body">
+    <div class="admin-shell">
+      <aside class="admin-sidebar">
+        <a href="/admin" class="brand"
+          ><img
+            class="brand-logo"
+            src="/static/assets/rp-modas-cereja.jpg"
+            alt="RP Modas Cereja"
+          /><span
+            ><span class="brand-name" data-brand>RP Modas Cereja</span
+            ><small>PAINEL DA LOJA</small></span
+          ></a
+        >
+        <nav aria-label="Painel">
+          <button class="side-link selected" data-screen="dashboard">
+            Dashboard</button
+          ><button class="side-link" data-screen="catalog">
+            <span data-icon="bag"></span>Peças</button
+          ><button class="side-link" data-screen="settings">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path
+                d="M5 5h14v14H5zM9 2v6m6-6v6M9 16v6m6-6v6M2 9h6m8 0h6M2 15h6m8 0h6"
+              /></svg
+            >Configurações
+          </button>
+        </nav>
+        <div class="sidebar-bottom">
+          <a href="/" target="_blank" rel="noopener">Abrir a loja</a
+          ><span class="muted">Gestão de peças e catálogo.</span>
+        </div>
+      </aside>
+      <main class="admin-main">
+        <header class="admin-top">
+          <span class="muted">Seu catálogo, do seu jeito.</span>
+          <div class="admin-top-actions">
+            <button class="text-button" id="logout">Sair</button
+            ><button
+              class="icon-button"
+              data-theme-toggle
+              aria-label="Ativar fundo branco"
+              aria-pressed="true"
+            ></button>
+          </div>
+        </header>
+        <section id="screen-dashboard">
+          <div class="admin-heading">
+            <div>
+              <p class="eyebrow">VISÃO GERAL</p>
+              <h1>Seu catálogo em números</h1>
+              <p class="muted">Interesse nas peças e composição da coleção.</p>
+            </div>
+            <button
+              class="button button-outline small-button"
+              id="refresh-dashboard"
+            >
+              Atualizar
+            </button>
+          </div>
+          <div class="dashboard-stats">
+            <div>
+              <span>Peças no catálogo</span
+              ><strong id="dash-products">—</strong>
+            </div>
+            <div>
+              <span>Unidades em estoque</span><strong id="dash-stock">—</strong>
+            </div>
+            <div>
+              <span>Preço médio na vitrine</span
+              ><strong id="dash-average">—</strong>
+            </div>
+            <div>
+              <span>Visualizações · 14 dias</span
+              ><strong id="dash-views">—</strong>
+            </div>
+          </div>
+          <section class="dashboard-card">
+            <div class="dashboard-card-heading">
+              <h2>Visualizações por dia</h2>
+              <span class="muted">Últimos 14 dias · UTC</span>
+            </div>
+            <div
+              id="daily-chart"
+              class="daily-chart"
+              aria-label="Visualizações diárias"
+            ></div>
+            <p class="field-hint">
+              Conta a abertura dos detalhes de uma peça. Repetições do mesmo
+              navegador no mesmo dia contam uma vez.
+            </p>
+          </section>
+          <div class="dashboard-grid">
+            <section class="dashboard-card">
+              <h2>Peças mais vistas</h2>
+              <p class="field-hint">Últimos 14 dias</p>
+              <div id="most-viewed" class="rank-list"></div>
+            </section>
+            <section class="dashboard-card">
+              <h2>Mais unidades em estoque</h2>
+              <div id="most-stock" class="rank-list"></div>
+            </section>
+            <section class="dashboard-card">
+              <h2>Estoque por categoria</h2>
+              <div id="category-chart" class="rank-list"></div>
+            </section>
+          </div>
+          <p class="admin-footnote">
+            Visualizações indicam interesse. A confirmação dos pedidos continua
+            no WhatsApp.
+          </p>
+        </section>
+        <section id="screen-catalog" hidden>
+          <div class="admin-heading">
+            <div>
+              <p class="eyebrow">COLEÇÃO</p>
+              <h1>Suas peças</h1>
+              <p class="muted">Cadastre, organize e publique na loja.</p>
+            </div>
+            <button class="button button-primary" id="new-product">
+              <span data-icon="plus"></span>Nova peça
+            </button>
+          </div>
+          <div class="admin-stats">
+            <div>
+              <span>Total de peças</span><strong id="stat-total">—</strong>
+            </div>
+            <div>
+              <span>Na vitrine</span><strong id="stat-active">—</strong>
+            </div>
+            <div>
+              <span>Unidades em estoque</span><strong id="stat-stock">—</strong>
+            </div>
+          </div>
+          <div class="setup-note" id="setup-note" hidden>
+            Configure o número do WhatsApp para receber os pedidos.<button
+              class="text-button"
+              data-screen="settings"
+            >
+              Configurar agora
+            </button>
+          </div>
+          <div class="catalog-tools">
+            <label class="search-field"
+              ><span class="sr-only">Buscar peça</span
+              ><input
+                id="admin-search"
+                type="search"
+                placeholder="Buscar por nome, categoria ou cor…" /></label
+            ><label
+              ><span class="sr-only">Filtrar peças</span
+              ><select id="admin-filter">
+                <option value="all">Todas as peças</option>
+                <option value="active">Na vitrine</option>
+                <option value="draft">Rascunhos</option>
+                <option value="empty">Sem estoque</option>
+              </select></label
+            ><button class="button button-outline small-button" id="export">
+              Exportar</button
+            ><label
+              class="button button-outline small-button"
+              for="import-file"
+              tabindex="0"
+              role="button"
+              >Importar</label
+            ><input
+              id="import-file"
+              class="sr-only"
+              type="file"
+              accept="application/json,.json"
+            />
+          </div>
+          <div class="admin-list" id="admin-list" aria-live="polite">
+            <p class="empty-state">Carregando peças…</p>
+          </div>
+          <p class="admin-footnote">
+            Os pedidos são combinados no WhatsApp. Atualize o estoque após
+            confirmar uma venda.
+          </p>
+        </section>
+        <section id="screen-settings" hidden>
+          <div class="admin-heading">
+            <div>
+              <p class="eyebrow">SUA MARCA</p>
+              <h1>Configurações</h1>
+              <p class="muted">O essencial para sua loja funcionar.</p>
+            </div>
+          </div>
+          <form class="settings-card" id="settings-form">
+            <h2>Informações da loja</h2>
+            <label class="form-field"
+              >Nome da marca<input
+                id="brand-name"
+                name="brand_name"
+                required
+                minlength="2"
+                maxlength="50"
+                autocomplete="organization" /></label
+            ><label class="form-field"
+              >WhatsApp da loja<input
+                id="whatsapp"
+                name="whatsapp"
+                type="tel"
+                placeholder="55 + DDD + número"
+                maxlength="30"
+                autocomplete="tel"
+              /><span class="field-hint"
+                >Inclua o código do país. No Brasil: 55, DDD e número. Pode
+                escrever com espaços e parênteses.</span
+              ></label
+            >
+            <p class="muted">
+              A conversa abre com as peças, os tamanhos, as quantidades e o
+              valor total. O cliente confirma o envio no WhatsApp.
+            </p>
+            <hr class="settings-divider" />
+            <h2>Redes sociais</h2>
+            <label class="social-toggle"
+              ><input type="checkbox" id="instagram-enabled" />Mostrar botão do
+              Instagram</label
+            ><label class="form-field"
+              >Perfil do Instagram<input
+                id="instagram-profile"
+                maxlength="200"
+                placeholder="@sua_loja"
+                autocomplete="off"
+              /><span class="field-hint"
+                >Use o @usuário ou a URL do perfil.</span
+              ></label
+            ><label class="social-toggle"
+              ><input type="checkbox" id="tiktok-enabled" />Mostrar botão do
+              TikTok</label
+            ><label class="form-field"
+              >Perfil do TikTok<input
+                id="tiktok-profile"
+                maxlength="200"
+                placeholder="@sua_loja"
+                autocomplete="off" /></label
+            ><button class="button button-primary" type="submit">
+              Salvar configurações
+            </button>
+          </form>
+          <section class="settings-card category-manager">
+            <h2>Categorias</h2>
+            <form class="category-form" id="category-form">
+              <label class="form-field"
+                >Nova categoria<input
+                  id="new-category-name"
+                  required
+                  maxlength="60"
+                  placeholder="Ex.: Bodies" /></label
+              ><button class="button button-primary" type="submit">
+                Adicionar
+              </button>
+            </form>
+            <div id="category-list"></div>
+            <p class="field-hint">
+              Ao excluir uma categoria com peças, escolha outra para recebê-las.
+            </p>
+          </section>
+        </section>
+      </main>
+    </div>
+    <dialog
+      class="editor-dialog"
+      id="editor-dialog"
+      aria-labelledby="editor-title"
+    >
+      <form id="product-form">
+        <div class="editor-heading">
+          <div>
+            <p class="eyebrow">CATÁLOGO</p>
+            <h2 id="editor-title">Nova peça</h2>
+          </div>
+          <button
+            type="button"
+            class="icon-button"
+            data-close="editor-dialog"
+            aria-label="Fechar cadastro"
+          >
+            <span data-icon="close"></span>
+          </button>
+        </div>
+        <div class="editor-body">
+          <input type="hidden" id="product-id" />
+          <div class="photo-editor">
+            <div class="photo-preview" id="photo-preview"></div>
+            <div>
+              <label
+                class="button button-outline small-button"
+                for="photo-file"
+                tabindex="0"
+                role="button"
+                >Enviar foto</label
+              ><input
+                class="sr-only"
+                id="photo-file"
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+              />
+              <p class="field-hint">JPG, PNG ou WebP · até 5 MB</p>
+              <button
+                type="button"
+                class="text-button remove-photo"
+                id="remove-photo"
+              >
+                Remover foto
+              </button>
+            </div>
+          </div>
+          <label class="form-field"
+            >Ou use uma URL de foto<input
+              id="image-url"
+              type="url"
+              placeholder="https://…"
+              maxlength="2000"
+          /></label>
+          <label class="form-field"
+            >Nome da peça<input
+              id="product-name"
+              required
+              minlength="2"
+              maxlength="100"
+              placeholder="Ex.: Conjunto Amora"
+          /></label>
+          <div class="form-grid">
+            <label class="form-field"
+              >Categoria<select id="category" required></select></label
+            ><label class="form-field"
+              >Cor<input
+                id="color"
+                maxlength="60"
+                placeholder="Ex.: Vinho" /></label
+            ><label class="form-field"
+              >Preço (R$)<input
+                id="price"
+                required
+                inputmode="decimal"
+                placeholder="129,90" /></label
+            ><label class="form-field"
+              >Preço anterior (opcional)<input
+                id="compare-price"
+                inputmode="decimal"
+                placeholder="159,90"
+            /></label>
+          </div>
+          <label class="form-field"
+            >Descrição<textarea
+              id="description"
+              rows="3"
+              maxlength="1000"
+              placeholder="Tecido, acabamento e detalhes da peça."
+            ></textarea>
+          </label>
+          <div class="form-grid">
+            <label class="form-field"
+              >Tamanhos<input
+                id="sizes"
+                required
+                placeholder="P, M, G, GG"
+              /><span class="field-hint">Separe por vírgula.</span></label
+            ><label class="form-field"
+              >Estoque total<input
+                id="stock"
+                type="number"
+                min="0"
+                max="100000"
+                step="1"
+                required
+              /><span class="field-hint"
+                >Total da peça, somando os tamanhos.</span
+              ></label
+            ><label class="form-field"
+              >Publicação<select id="status">
+                <option value="active">Na vitrine</option>
+                <option value="draft">Rascunho</option>
+              </select></label
+            ><label class="checkbox-field"
+              ><input type="checkbox" id="featured" />Destacar na coleção</label
+            >
+          </div>
+        </div>
+        <div class="editor-footer">
+          <button
+            type="button"
+            class="button button-outline"
+            data-close="editor-dialog"
+          >
+            Cancelar</button
+          ><button
+            class="button button-primary"
+            type="submit"
+            id="save-product"
+          >
+            Salvar peça
+          </button>
+        </div>
+      </form>
+    </dialog>
+    <dialog
+      class="editor-dialog category-dialog"
+      id="delete-category-dialog"
+      aria-labelledby="delete-category-title"
+    >
+      <form id="delete-category-form">
+        <div class="editor-heading">
+          <h2 id="delete-category-title">Excluir categoria</h2>
+          <button
+            type="button"
+            class="icon-button"
+            data-close="delete-category-dialog"
+            aria-label="Cancelar"
+          >
+            <span data-icon="close"></span>
+          </button>
+        </div>
+        <div class="editor-body">
+          <p id="delete-category-text" class="muted"></p>
+          <input type="hidden" id="delete-category-id" /><label
+            class="form-field"
+            id="replacement-field"
+            >Mover peças para<select id="replacement-category"></select
+          ></label>
+        </div>
+        <div class="editor-footer">
+          <button
+            type="button"
+            class="button button-outline"
+            data-close="delete-category-dialog"
+          >
+            Cancelar</button
+          ><button class="button button-primary" type="submit">
+            Excluir categoria
+          </button>
+        </div>
+      </form>
+    </dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  </body>
+</html>

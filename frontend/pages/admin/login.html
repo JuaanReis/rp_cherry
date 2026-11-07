@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#100809" />
+    <title>RP Modas Cereja · Entrar no painel</title>
+    <link rel="icon" href="/static/assets/cherry.svg" />
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="stylesheet" href="/static/css/additions.css" />
+    <script src="/static/js/common.js" defer></script>
+    <script src="/static/js/login.js" defer></script>
+  </head>
+  <body class="login-body">
+    <button
+      class="icon-button login-theme"
+      data-theme-toggle
+      aria-label="Ativar fundo branco"
+      aria-pressed="true"
+    ></button>
+
+    <main class="login-card">
+      <a href="/" class="brand">
+        <img
+          class="brand-logo"
+          src="/static/assets/rp-modas-cereja.jpg"
+          alt="RP Modas Cereja"
+        />
+        <span>
+          <span class="brand-name" data-brand>RP Modas Cereja</span>
+          <small>PAINEL DA LOJA</small>
+        </span>
+      </a>
+
+      <h1>Bem-vinda ao painel.</h1>
+      <p class="muted">Entre com sua senha para cuidar da coleção.</p>
+
+      <form id="login-form">
+        <label class="login-field" for="admin-password">
+          Senha
+          <input
+            id="admin-password"
+            name="password"
+            type="password"
+            required
+            maxlength="512"
+            autocomplete="current-password"
+          />
+        </label>
+        <p class="login-error" id="login-error" role="alert" hidden></p>
+        <button
+          class="button button-primary button-full"
+          type="submit"
+          id="login-submit"
+        >
+          Entrar
+        </button>
+      </form>
+
+      <a class="login-back" href="/">Voltar para a loja</a>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  </body>
+</html>

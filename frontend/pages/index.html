@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#100809" />
+    <title>RP Modas Cereja · Lingerie</title>
+    <meta
+      name="description"
+      content="Moda íntima, conforto e detalhes na medida certa. Escolha suas peças e peça pelo WhatsApp."
+    />
+    <link rel="icon" href="/static/assets/cherry.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="stylesheet" href="/static/css/additions.css" />
+    <script src="/static/js/common.js" defer></script>
+    <script src="/static/js/shop.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#colecao">Ir para a coleção</a>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="/" class="brand" aria-label="Página inicial">
+          <img
+            class="brand-logo"
+            src="/static/assets/rp-modas-cereja.jpg"
+            alt="RP Modas Cereja"
+          />
+          <span>
+            <span class="brand-name" data-brand>RP Modas Cereja</span>
+            <small>MODA ÍNTIMA</small>
+          </span>
+        </a>
+
+        <nav class="header-nav" aria-label="Navegação">
+          <a href="#colecao">Coleção</a>
+          <button class="text-button" data-contact>Fale com a gente</button>
+        </nav>
+
+        <div class="header-actions">
+          <button
+            class="icon-button theme-button"
+            data-theme-toggle
+            aria-label="Ativar fundo branco"
+            aria-pressed="true"
+          ></button>
+          <button class="bag-button" id="open-cart" aria-label="Abrir carrinho">
+            <span data-icon="bag"></span>
+            <span class="bag-label">Sacola</span>
+            <span class="cart-count" id="cart-count">0</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero container" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">RP MODAS CEREJA</p>
+          <h1 id="hero-title">Delicadeza que veste a sua <em>essência.</em></h1>
+          <p>
+            Peças para se sentir bonita, confortável e segura em cada detalhe.
+          </p>
+          <a class="button button-gold" href="#colecao">Conheça as peças</a>
+          <span class="hero-caption typing-caption">
+            <span id="typed-text" aria-hidden="true"
+              >Conforto para o seu dia.</span
+            >
+            <span class="typing-cursor" aria-hidden="true"></span>
+            <span class="sr-only">
+              Conforto para o seu dia. Delicadeza, do seu jeito. Escolha aqui e
+              combine pelo WhatsApp.
+            </span>
+          </span>
+        </div>
+
+        <div class="hero-image" role="img" aria-label="Marca RP Modas Cereja">
+          <img src="/static/assets/rp-modas-cereja.jpg" alt="" />
+          <span class="image-caption">Feito para você.</span>
+        </div>
+      </section>
+
+      <section
+        class="collection container"
+        id="colecao"
+        aria-labelledby="collection-title"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">NOSSA COLEÇÃO</p>
+            <h2 id="collection-title">Encontre sua peça favorita.</h2>
+          </div>
+          <span id="collection-count" class="muted">Carregando coleção…</span>
+        </div>
+
+        <div class="catalog-search">
+          <label class="shop-search">
+            <span class="sr-only">Buscar pelo nome da peça</span>
+            <input
+              type="search"
+              id="product-search"
+              placeholder="Buscar por nome da peça"
+              autocomplete="off"
+            />
+          </label>
+          <label class="shop-sort">
+            <span class="sr-only">Ordenar peças</span>
+            <select id="product-sort">
+              <option value="featured">Destaques</option>
+              <option value="price-asc">Menor preço</option>
+              <option value="price-desc">Maior preço</option>
+              <option value="name">Nome: A–Z</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="catalog-refine" aria-label="Filtros da coleção">
+          <label>
+            Preço mínimo (R$)
+            <input id="price-min" inputmode="decimal" placeholder="0,00" />
+          </label>
+          <label>
+            Preço máximo (R$)
+            <input
+              id="price-max"
+              inputmode="decimal"
+              placeholder="Sem limite"
+            />
+          </label>
+          <label>
+            Tamanho
+            <select id="size-filter">
+              <option value="">Todos</option>
+            </select>
+          </label>
+          <label>
+            Cor
+            <select id="color-filter">
+              <option value="">Todas</option>
+            </select>
+          </label>
+          <label class="stock-filter">
+            <input type="checkbox" id="stock-filter" />
+            Só disponíveis
+          </label>
+          <button class="text-button clear-filters" id="clear-filters">
+            Limpar filtros
+          </button>
+        </div>
+
+        <p class="filter-error" id="filter-error" role="status" hidden></p>
+        <div
+          class="filters"
+          id="filters"
+          role="group"
+          aria-label="Filtrar por categoria"
+        ></div>
+
+        <div class="product-grid" id="products" aria-live="polite">
+          <p class="empty-state">Preparando suas peças…</p>
+        </div>
+
+        <div id="catalog-error" class="empty-state" hidden>
+          <p>Não conseguimos carregar a coleção.</p>
+          <button class="button button-outline" id="reload-catalog">
+            Tentar novamente
+          </button>
+        </div>
+      </section>
+
+      <section class="contact-strip container">
+        <div>
+          <p class="eyebrow">ATENDIMENTO</p>
+          <h2>Uma dúvida, uma escolha.</h2>
+          <p>A gente te ajuda a encontrar sua peça.</p>
+        </div>
+        <button class="button button-outline" data-contact>
+          <span data-icon="whatsapp"></span>
+          Conversar no WhatsApp
+        </button>
+      </section>
+    </main>
+
+    <footer class="site-footer container">
+      <a class="brand footer-brand" href="/">
+        <img
+          class="brand-logo"
+          src="/static/assets/rp-modas-cereja.jpg"
+          alt=""
+        />
+        <span data-brand>RP Modas Cereja</span>
+      </a>
+      <p>Moda íntima. Do seu jeito.</p>
+      <nav
+        class="social-links"
+        id="social-links"
+        aria-label="Redes sociais"
+        hidden
+      ></nav>
+      <span
+        >© <span id="year"></span> <span data-brand>RP Modas Cereja</span></span
+      >
+    </footer>
+
+    <dialog
+      id="product-dialog"
+      class="product-dialog"
+      aria-labelledby="detail-name"
+    >
+      <button
+        class="icon-button dialog-close"
+        data-close="product-dialog"
+        aria-label="Fechar detalhes"
+      >
+        <span data-icon="close"></span>
+      </button>
+      <div id="product-detail"></div>
+    </dialog>
+
+    <dialog id="cart-dialog" class="cart-dialog" aria-labelledby="cart-title">
+      <div class="drawer-heading">
+        <div>
+          <p class="eyebrow">SUAS ESCOLHAS</p>
+          <h2 id="cart-title">Sua sacola</h2>
+        </div>
+        <button
+          class="icon-button"
+          data-close="cart-dialog"
+          aria-label="Fechar sacola"
+        >
+          <span data-icon="close"></span>
+        </button>
+      </div>
+      <div id="cart-items" class="cart-items"></div>
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Total das peças</span>
+          <strong id="cart-total">R$ 0,00</strong>
+        </div>
+        <p class="muted">Frete e disponibilidade a combinar.</p>
+        <button id="checkout-cart" class="button button-primary button-full">
+          <span data-icon="whatsapp"></span>
+          Pedir pelo WhatsApp
+        </button>
+        <button class="text-button continue" data-close="cart-dialog">
+          Continuar escolhendo
+        </button>
+      </div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  </body>
+</html>
